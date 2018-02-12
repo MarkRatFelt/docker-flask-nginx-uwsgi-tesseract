@@ -7,3 +7,9 @@ You gotta change the 3. line in nginx_app.conf with your server ip
 Put your project in the /app folder and user main.py as the main script. 
 
 Of course you can change all that. 
+
+
+## run it
+
+`sudo docker build -t your_project . `
+`sudo docker run -d -p 80:80 your_project`
