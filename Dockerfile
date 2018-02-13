@@ -30,9 +30,20 @@ RUN apt-get update && \
 	sqlite3 \
 	tesseract-ocr \
 	zlib1g-dev \
-	curl && \
+	curl wget locales && \
 	pip3 install -U pip setuptools && \
    rm -rf /var/lib/apt/lists/*
+
+# Ensure that we always use UTF-8 and with German locale
+RUN locale-gen de_DE.UTF-8
+
+COPY ./default_locale /etc/default/locale
+RUN chmod 0755 /etc/default/locale
+
+ENV PYTHONIOENCODING=utf-8
+ENV LC_ALL=de_DE.UTF-8
+ENV LANG=de_DE.UTF-8
+ENV LANGUAGE=de_DE.UTF-8
 
 # install leptonica
 RUN curl http://www.leptonica.org/source/leptonica-1.74.4.tar.gz -o leptonica-1.74.4.tar.gz && \
